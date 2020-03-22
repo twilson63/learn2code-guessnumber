@@ -1,0 +1,62 @@
+<script>
+// setup state
+let randomNumber, guessCount, guesses, lastResult, lowOrHi, guess, gameOver
+
+resetGame()
+
+// guess function
+function handleGuess() {
+  // convert into a number type
+  let userGuess = Number(guess)
+  // if the number of times guessed equals 1 then create prefix
+  if (guessCount === 1) {
+    guesses = 'Previous guesses: '
+  }
+  // add guess to the guesses list
+  guesses += guess + ' '
+
+  // if user guessed right then show Congrats!
+  if (userGuess === randomNumber) {
+    lastResult = 'Congrats! You got it Right!'
+    lowOrHi = ''
+    gameOver = true
+  } else if (guessCount === 10) {  // if guess count equals 10 then game over
+    lastResult = '!!! Game Over !!!'
+    gameOver = true
+  } else { // otherwise instruct user if their number is high or low
+    lastResult = 'Wrong!'
+    if (userGuess < randomNumber) {
+      lowOrHi = 'Last guess was too low!'
+    } else if (userGuess > randomNumber) {
+      lowOrHi = 'Last guess was too high!'
+    }
+  }
+
+  // increment guess count
+  guessCount++
+  // clear value
+  guess = ''
+}
+
+// reset state
+function resetGame() {
+  randomNumber = Math.floor(Math.random + 100) + 1
+  guessCount = 1 
+  guesses = ''
+  lastResult = ''
+  lowOrHi = ''
+  gameOver = false
+}
+
+</script>
+<div>
+  <p class="guesses">{guesses}</p>
+  <p class="lastResult">{lastResult}</p>
+  <p class="lowOrHi">{lowOrHi}</p>
+</div>
+<label for="guessField">Enter a guess: </label>
+<input bind:value="{guess}" type="text" id="guessField">
+<input on:click={handleGuess} type="submit" class="guessSubmit" value="Submit a Guess">
+{#if gameOver}
+<button on:click={resetGame}>Reset Game</button>
+{/if}

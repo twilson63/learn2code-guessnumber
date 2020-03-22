@@ -1,0 +1,48 @@
+<script>
+  // state variable
+  let guesses, lastResult, guess, guessCount, randomNumber, lowOrHi, gameOver
+  // init Game
+  resetGame()
+  
+  function handleGuess() {
+  /* do exercise here */
+    
+  /* end */
+  }
+  
+  function resetGame() {
+    randomNumber = Math.floor(Math.random() * 100) + 1
+    guessCount = 1
+    lastResult = ''
+    guesses = ''
+    lowOrHi = ''
+    gameOver = false
+  }
+  
+</script>
+<main>
+  <h1>
+    Guess a Number
+  </h1>
+  <div>
+    <p class="guesses">{guesses}</p>
+    <p class="lastResult">{lastResult}</p>
+    <p class="lowOrHi">{lowOrHi}</p>
+  </div>
+  <div>   
+    <label for="guessField">Enter a guess: </label>
+    <input bind:value="{guess}" type="text" id="guessField">
+    <input on:click="{handleGuess}" type="submit" class="guessSubmit" value="Submit a Guess">
+  </div>
+
+  {#if gameOver}
+    <button on:click="{resetGame}">Reset Game</button>
+  {/if}
+</main>
+<style>
+  main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+</style>
