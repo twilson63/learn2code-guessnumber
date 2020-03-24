@@ -4,11 +4,14 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "rollup -c && w3 public"
+    "watch": "rollup -cw",
+    "serve": "PORT=5000 w3 public",
+    "start": "run-p watch serve"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^11.0.2",
     "@rollup/plugin-node-resolve": "^7.1.1",
+    "npm-run-all": "^4.1.5",
     "rollup": "^1.32.0",
     "rollup-plugin-svelte": "^5.1.1",
     "rollup-plugin-terser": "^5.2.0",
